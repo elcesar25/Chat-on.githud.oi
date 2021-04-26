@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <meta charset="utf-8"><!-- Define el conjunto de caracteres -->
+        <title>INICIO</title>
+        <link rel="stylesheet" href="css/estilos.css"><!-- Incluye los estilos -->
+        <!-- /* INCLUYE LAS LIBRERÍAS NECESARIAS */ -->
+        <script type="text/javascript" src="scripts/jquery-2.2.0.js"></script>
+        <script type="text/javascript" src="scripts/jquery.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.js"></script>
+        <script type="text/javascript" src="scripts/scripts.js"></script><!-- Incluye los scripts (funciones)-->
+        <style>  
+            #nuevo-usuario{
+                text-align:center;
+                width:100%;
+                display:none;
+            }
+            table tr td{
+                text-align:right;
+            }
+            #nombre-usuario{                
+                min-height:30px;
+                background-color:white;
+                text-align:center;
+                position: fixed;
+                z-index:+10000000;
+                left:2em;
+                top:1em;
+                display:inline-block;
+                display:none;
+                border-radius:7px;
+                box-shadow: 0px 0px 3px 3px lime;
+            }
+        </style>        
+        <script>
+            $(document).ready(function(){
+                $('body').before(function(){ 
+                    //borrarDB()
+                    crearTabla();
+                });               
+                $('#botonis').click(function(){
+                    validar_campos(document.getElementById('formulario'));
+                });
+                $('#botonnu').click(function(){
+                    $('#nuevo-usuario').fadeIn('smooth');
+                });
+                $('#botoncu').click(function(){
+                    validar_campos(document.getElementById('nuevo-usuario'));
+                });
+                $('#botonOut').click(function(){
+                    adios();
+                });
+                $('#botonmn').click(function(){
+                    enviarMensaje(document.getElementById('mensaje-nuevo'));
+                });
+                $('#contenedor-chat').mouseenter(function(){
+                    mensajeVisto();
+                });
+            });
+        </script>
+    </head>
+    <body onbeforeunload="adios()" onunload="adios()"> 
+
+        <div class="cajalogo">
+            <div class="logo"></div>  
+        </div>
+
+        <div id="iniciar-sesion">
+            <form id="formulario" method="post" action="chat.html">
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="text-align:center;"><b>INICIAR SESIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                USUARIO:
+                            </td>
+                            <td>
+                                <input type="text" name="usuario" id="usuario" class="texto" onfocus="fondo_blanco(this)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                CONTRASEÑA:
+                            </td>
+                            <td>
+                                <input type="password" name="contraseña" id="contrasenia" class="texto" onfocus="fondo_blanco(this)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center;">
+                                <input type="button" value="INICIAR SESIÓN" class="boton-enviar" id="botonis">
+                                <input type="button" value="NUEVO USUARIO" class="boton-enviar" id="botonnu">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div id="nombre-usuario"></div>
+            <div id="nuevo-usuario">
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td>NOMBRE:</td>
+                            <td><input type="text" name="nombre" class="texto" id="n-nombre" required></td>
+                        </tr>
+                        <tr>
+                        <td>NICKNAME:</td>
+                            <td><input type="text" name="nickname" class="texto" id="n-nickname" required></td>
+                        </tr>
+                        <tr>
+                            <td>PASSWORD:</td>
+                            <td><input type="password" name="password" class="texto" id="n-password" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <input type="button" class="boton-enviar" value="CREAR USUARIO" id="botoncu">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <center>
+                <div class="mensaje-validar" id="msg"></div>
+            </center>            
+        </div>  
+        <div id="sala-chat">
+            <div class="barra-superior" id="barra-usuario">
+                <div id="nombre-usuario1"></div>
+                <input type="button" class="boton-cerrar" value="CERRAR SESIÓN" id="botonOut">
+            </div>
+            <div id="contenedor-chat">
+                <div id="usuarios-online"></div>
+                <br>
+                <div id="contenedor-mensajes"></div>
+                <div id="contenedor-mensaje-nuevo">
+                    <br>
+                    <textarea id="mensaje-nuevo" name="mensaje" class="texto-mensaje"></textarea>
+                    <br>
+                    <br>
+                    <input type="button" id="botonmn" value="ENVIAR" class="boton-enviar">
+                </div>
+            </div>
+
+        </div>
+        <div class="pie">
+        </div>
+
+    </body>
+</html>
